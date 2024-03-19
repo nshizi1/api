@@ -8,6 +8,7 @@ function MyComponent() {
     try {
       const response = await axios.get('https://jsonplaceholder.typicode.com/comments');
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -21,8 +22,8 @@ function MyComponent() {
     <div>
       {data.map((item) => (
         <div key={item.id}>
-          <h4>{item.name}</h4>
-          <h3>{item.email}</h3>
+          <h3>{item.name}</h3>
+          <h4>{item.email}</h4>
           <p>{item.body}</p>
           {/* <img src={item.url} alt="" /> */}
         </div>
