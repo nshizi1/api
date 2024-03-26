@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="content">
+      <p id="load">Loading...</p>
+    </div>
+  </body>
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/comments")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("load").innerHTML = "";
+        let ul = "<ul>";
+        data.forEach((li) => (ul += `<li>Name: ${li.email}</li>`));
+        ul += "</ul>";
+        document.getElementById("content").innerHTML = ul;
+      });
+  </script>
+</html>
+
+<!-- frontendMentor.io -->

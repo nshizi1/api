@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="content">
+      <p id="adviceId">Advice Id 🤌</p>
+      <h4 id="adviceContent">Quote goes here</h4>
+      <button id="button">Generate Advice</button>
+    </div>
+  </body>
+  <script>
+    var button = document.getElementById("button");
+    var adviceId = document.getElementById("adviceId");
+    var adviceContent = document.getElementById("adviceContent");
+
+    button.addEventListener("click", function () {
+        button.disabled = true;
+        button.innerHTML = "Loading";
+        fetch("https://api.adviceslip.com/advice")
+        .then((res) => res.json())
+        .then(data => {
+            adviceId.innerHTML= `Advice id: ${data.slip.id}`;
+            adviceContent.innerHTML = data.slip.advice;
+            button.disabled = false;
+            button.innerHTML = "Generate Advice";
+        })
+    });
+  </script>
+</html>
