@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="advice_card">
+    <p>Advice ID</p>
+    <h1>Advice Will Appear Here!</h1>
+    <button id="myButton">Get Advice</button>
+  </div>
+
+  <script>
+    let button = document.querySelector('#myButton');
+
+    button.addEventListener('click', () => {
+      document.querySelector('h1').innerHTML = 'Loading...';
+      document.querySelector('p').innerHTML = 'Advice Id: ✨';
+
+      document.querySelector('button').disabled = true;
+      document.querySelector('button').innerHTML = 'Loading...';
+      fetch('https://api.adviceslip.com/advice')
+        .then((res) => res.json())
+        .then((d) => {
+          document.querySelector('h1').innerHTML = d.slip.advice;
+          document.querySelector('p').innerHTML = `Advice ID: ${d.slip.id}`;
+          document.querySelector('button').disabled = false;
+          document.querySelector('button').innerHTML = 'Get Advice';
+        })
+    })
+  </script>
+</body>
+</html>

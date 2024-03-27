@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="myBody">
+    <div class="image">
+      <div class="cover-image-skeleton"></div>
+    </div>
+
+    <form action="" >
+      <input type="text" name="qrData" id="qrData">
+      <input type="submit" value="Generate QR Code" id="generateQR">
+    </form>
+  </div>
+
+  <script>
+    let form = document.querySelector('form');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault()
+
+      let qrData = document.querySelector('#qrData').value;
+
+      fetch(`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrData}`)
+        .then((res) => res.blob())
+        .then((data) => {
+          let url = URL.createObjectURL(data);
+          let image = `<img src='${url}'>`
+          document.querySelector('.image').innerHTML = image;
+        })
+      });
+  </script>
+</body>
+</html>
